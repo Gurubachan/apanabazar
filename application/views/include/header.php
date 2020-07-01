@@ -1,5 +1,6 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,9 +33,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 	<!-- Bootstrap css-->
 	<link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/bootstrap.css')?>">
-
 	<!-- App css-->
 	<link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/admin.css')?>">
+    <!-- toastr css-->
+    <link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/toastr.css')?>">
+    <link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/jsgrid.css')?>">
+<!--    <link rel="stylesheet" type="text/css" href="--><?//=base_url('assets/css/datatables.css')?><!--">-->
+    <link rel="stylesheet" type="text/css" href="<?=base_url('assets/dataTables/css/dataTables.bootstrap.css')?>">
+    <link rel="stylesheet" type="text/css" href="<?=base_url('assets/dataTables/css/dataTables.bootstrap4.css')?>">
+    <link rel="stylesheet" type="text/css" href="<?=base_url('assets/dataTables/css/dataTables.foundation.css')?>">
+    <link rel="stylesheet" type="text/css" href="<?=base_url('assets/dataTables/css/dataTables.jqueryui.css')?>">
+    <link rel="stylesheet" type="text/css" href="<?=base_url('assets/dataTables/css/dataTables.semanticui.css')?>">
+    <link rel="stylesheet" type="text/css" href="<?=base_url('assets/dataTables/css/jquery.dataTables.css')?>">
+
+<!--    select2-->
+    <link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/select2.css')?>">
+<!--    select2 end-->
+
 </head>
 
 <body>

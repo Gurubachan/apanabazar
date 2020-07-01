@@ -15,7 +15,17 @@ class Model_Db extends CI_Model
                 '6'=>'tbl_sub_category','7'=>'tbl_usertype',
                 '8'=>'tbl_vendor_flag','9'=>'tbl_vendor_type',
                 '10'=>'tbl_vendors','11'=>'tbl_manufacturer',
-                '12'=>'tbl_vendor_bank_details','13'=>'',
+                '12'=>'tbl_vendor_bank_details','13'=>'tbl_unit',
+                '14'=>'tbl_inventory','15'=>'tbl_item_images',
+                '16'=>'tbl_batch','17'=>'tbl_attribute_group',
+                '18'=>'tbl_attribute','19'=>'tbl_item_variant',
+                '20'=>'tbl_item_summary','21'=>'tbl_user',
+                '22'=>'tbl_state','23'=>'tbl_district',
+                '24'=>'tbl_city','25'=>'tbl_delivery_address',
+                '26'=>'tbl_item', '27' =>'tbl_taxrate',
+                '28'=>'tbl_variant','29'=>'tbl_variant_product_mapping',
+                '30'=>'tbl_cart','31'=>'view_inventory',
+                '32'=>'tbl_aggregator','33'=>'tbl_delivery_boy'
             );
             if($table[$tblno]){
                 return $table[$tblno];

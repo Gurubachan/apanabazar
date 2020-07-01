@@ -11,13 +11,16 @@ class Vendor_flag extends CI_Controller
     public function index()
     {
         try{
-            $this->load->view('include/header');
-            $this->load->view('include/topbar');
-            $this->load->view('include/sidebar');
-            $this->load->view('vendorflag/vendor_flag');
-            $this->load->view('include/footer');
-            $this->load->view('vendorflag/vendor_script');
-
+			if(isset($this->session->adminLogin['userid'])){
+				$this->load->view('include/header');
+				$this->load->view('include/topbar');
+				$this->load->view('include/sidebar');
+				$this->load->view('vendorflag/vendor_flag');
+				$this->load->view('include/footer');
+				$this->load->view('vendorflag/vendor_script');
+			}else{
+				redirect('Welcome/');
+			}
         }catch (Exception $e){
             $data['message']= "Message:".$e->getMessage();
             $data['status']=false;

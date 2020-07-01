@@ -1,11 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
-
-</div>
-
 <!-- footer start-->
-<footer class="footer">
+<footer class="footer fixed-bottom">
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-6 footer-copyright">
@@ -17,23 +14,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
 	</div>
 </footer>
-<!-- footer end-->
-</div>
 
-</div>
-
-</body>
-</html>
-
-<!-- latest jquery-->
 <script src="<?=base_url('assets/js/jquery-3.3.1.min.js')?>"></script>
 
 <!-- Bootstrap js-->
 <script src="<?=base_url('assets/js/popper.min.js')?>"></script>
 <script src="<?=base_url('assets/js/bootstrap.js')?>"></script>
 
- <!--Font-Awesome js-->
- <<script src="<?=base_url('assets/js/all.js')?>"></script>
+<!--Font-Awesome js-->
+<script src="<?=base_url('assets/js/all.js')?>"></script>
 
 <!-- feather icon js-->
 <script src="<?=base_url('assets/js/icons/feather-icon/feather.min.js')?>"></script>
@@ -71,7 +60,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <script src="<?=base_url('assets/js/admin-customizer.js')?>"></script>
 
 <!--dashboard custom js-->
-<!--<script src="--><?//=base_url('assets/js/dashboard/default.js')?><!--"></script>-->
 
 <!--right sidebar js-->
 <script src="<?=base_url('assets/js/chat-menu.js')?>"></script>
@@ -84,4 +72,30 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <!--script admin-->
 <script src="<?=base_url('assets/js/admin-script.js')?>"></script>
+
+<!--script admin-->
+<script src="<?=base_url('assets/js/toastr.js')?>"></script>
+<!--<script src="--><?//=base_url('assets/js/jsgrid/jsgrid.min.js')?><!--"></script>-->
+<!--<script src="--><?//=base_url('assets/js/jsgrid/griddata-reports.js')?><!--"></script>-->
+<!--<script src="--><?//=base_url('assets/js/jsgrid/jsgrid-reports.js')?><!--"></script>-->
+<!--<script src="--><?//=base_url('assets/js/datatables/jquery.dataTables.min.js')?><!--"></script>-->
+<!--<script src="--><?//=base_url('assets/datatables/js/dataTables.bootstrap.js')?><!--"></script>-->
+<script src="<?=base_url('assets/datatables/js/jquery.dataTables.js')?>"></script>
+<!--<script src="--><?//=base_url('assets/datatables/js/dataTables.bootstrap.js')?><!--"></script>-->
+<!--<script src="--><?//=base_url('assets/datatables/js/dataTables.bootstrap4.js')?><!--"></script>-->
+<!--<script src="--><?//=base_url('assets/datatables/js/dataTables.foundation.js')?><!--"></script>-->
+<script src="<?=base_url('assets/datatables/js/dataTables.jqueryui.js')?>"></script>
+<!--<script src="--><?//=base_url('assets/datatables/js/dataTables.semanticui.js')?><!--"></script>-->
+
+<!--select2-->
+<script src="<?=base_url('assets/js/select2/select2.min.js')?>"></script>
+<!--select2-->
+<script>
+    let uri1 ="<?=$this->uri->segment(1)?>";
+    console.log(uri1);
+</script>
+</body>
+</html>
+
+
 

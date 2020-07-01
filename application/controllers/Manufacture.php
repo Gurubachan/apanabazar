@@ -11,12 +11,16 @@ class Manufacture extends CI_Controller
     public function index()
     {
         try{
-            $this->load->view('include/header');
-            $this->load->view('include/topbar');
-            $this->load->view('include/sidebar');
-            $this->load->view('Manufacturer/frmManufacture');
-            $this->load->view('include/footer');
-            $this->load->view('Manufacturer/manufacture_script');
+			if(isset($this->session->adminLogin['userid'])){
+				$this->load->view('include/header');
+				$this->load->view('include/topbar');
+				$this->load->view('include/sidebar');
+				$this->load->view('Manufacturer/frmManufacture');
+				$this->load->view('include/footer');
+				$this->load->view('Manufacturer/manufacture_script');
+			}else{
+				redirect('Welcome/');
+			}
         }catch (Exception $e){
             $data['message']= "Message:".$e->getMessage();
             $data['status']=false;
@@ -32,27 +36,20 @@ class Manufacture extends CI_Controller
             $insert = array();
             $status = true;
             $request = json_decode(json_encode($_POST), false);
-            $config['upload_path']          = './assets/images/Manufacturer';
-            $config['allowed_types']        = 'gif|jpg|png|jpeg';
-            $config['max_size']             = 2048;
-            $config['max_width']            = 2048;
-            $config['max_height']           = 2048;
-            $config['file_name']           = 'manuimage'.date("YmdHis");
-            $this->load->library('upload', $config);
-            if ( $this->upload->do_upload('txtMimage')){
-                $upload_photo = $this->upload->data();
-                $insert[0]['image']=$upload_photo['file_name'] ;
-            }else{
-                $status=false;
-                $data['data'] = $this->upload->display_errors();
-            }
+			$this->load->library('Image_resize');
+			if($return_val=$this->image_resize->upload_image('txtMimage','./assets/images/Manufacturer')){
+				$insert[0]['image']=$return_val['raw_name'];
+			}else{
+				$status=false;
+				$data['data'] = "Image Upload Error.";
+			}
             if(isset($request->txtManufacturer) && preg_match("/[a-zA-Z ]{3,50}$/",$request->txtManufacturer )){
                 $insert[0]['manufacturer']=$request->txtManufacturer ;
             }else{
                 $status=false;
                 $data['data'] = "manufacturer Error";
             }
-            if(isset($request->txtDescription) && preg_match("/[a-zA-Z ,.\-]{5,500}$/",$request->txtDescription)){
+            if(isset($request->txtDescription) && preg_match("/[a-zA-Z0-9 ,.\-]{5,500}$/",$request->txtDescription)){
                 $insert[0]['description']=$request->txtDescription;
             }else{
                 $status=false;

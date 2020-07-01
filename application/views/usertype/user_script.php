@@ -3,10 +3,11 @@
 <script type="text/javascript">
     $(function () {
         load_report();
+        $("#showtablereport").DataTable();
     });
-    jQuery(document).ready(function () {
-        load_company('cboCompany',"<?=base_url()?>");
-    });
+    //jQuery(document).ready(function () {
+    //    load_company('cboCompany',"<?//=base_url()?>//");
+    //});
       $('#frmUsertype').submit(function (e) {
         e.preventDefault();
         submitform(this,'btnSubmit','txtid');
@@ -23,7 +24,7 @@
                     for (var i in data.data) {
                         htmldata +="<tr>"+
                             "<td>"+count+"</td>"+
-                            "<td>"+data.data[i].companyid+"</td>"+
+                            // "<td>"+data.data[i].companyid+"</td>"+
                             "<td>"+data.data[i].usertypename+"</td>"+
                             "<td class='text-center' id='action"+data.data[i].id+"'>" ;
                         if (data.data[i].isactive==1){
@@ -41,4 +42,5 @@
     function active_inactive(rowid,isactive) {
         active_inactive_records(rowid,isactive,"<?=base_url('Usertype/isactive_usertype')?>");
     }
+
 </script>

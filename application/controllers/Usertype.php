@@ -8,6 +8,27 @@ class Usertype extends CI_Controller
     {
         parent::__construct();
     }
+	public function index()
+	{
+		try{
+			if(isset($this->session->adminLogin['userid'])){
+				$this->load->view('include/header');
+				$this->load->view('include/topbar');
+				$this->load->view('include/sidebar');
+				$this->load->view('usertype/usertype');
+				$this->load->view('include/footer');
+				$this->load->view('usertype/user_script');
+			}else{
+				redirect('Welcome/');
+			}
+		}catch (Exception $e){
+			$data['message']= "Message:".$e->getMessage();
+			$data['status']=false;
+			$data['error']=true;
+			echo json_encode($data);
+			exit();
+		}
+	}
     public function create_usertype()
     {
         try {
@@ -15,12 +36,12 @@ class Usertype extends CI_Controller
             $insert = array();
             $status = true;
             $request = json_decode(json_encode($_POST), false);
-            if (isset($request->cboCompany) && preg_match("/^[0-9]{1,2}$/", $request->cboCompany)) {
-                $insert[0]['companyid'] = $request->cboCompany;
-            } else {
-                $status = false;
-                $data['data'] = "Companyid Error";
-            }
+//            if (isset($request->cboCompany) && preg_match("/^[0-9]{1,2}$/", $request->cboCompany)) {
+//                $insert[0]['companyid'] = $request->cboCompany;
+//            } else {
+//                $status = false;
+//                $data['data'] = "Companyid Error";
+//            }
             if (isset($request->txtUsertype) && preg_match("/[a-zA-Z ]{3,50}$/", $request->txtUsertype)) {
                 $insert[0]['usertypename'] = $request->txtUsertype;
             } else {
@@ -103,7 +124,7 @@ class Usertype extends CI_Controller
                 foreach ($res as $r) {
                     $data['data'][] = array(
                         'id' => $r->id,
-                        'companyid'=>$r->companyid,
+//                        'companyid'=>$r->companyid,
                         'usertypename'=>$r->usertypename,
                         'isactive' => $r->isactive
                     );
@@ -133,7 +154,7 @@ class Usertype extends CI_Controller
                     foreach ($res as $r) {
                         $data['data'][] = array(
                             'id'=>$r->id,
-                            'companyid'=>$r->companyid,
+//                            'companyid'=>$r->companyid,
                             'usertypename'=>$r->usertypename,
                             'isactive'=>$r->isactive
                         );

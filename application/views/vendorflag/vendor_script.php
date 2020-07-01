@@ -6,7 +6,7 @@
     });
     $('#frmVendorFlag').submit(function (e) {
         e.preventDefault();
-        submitbtn(this,'btnSubmit','txtid');
+        submitform(this,'btnSubmit','txtid');
     });
     function load_report() {
         $.ajax({

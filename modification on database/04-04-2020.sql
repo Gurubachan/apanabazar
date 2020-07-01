@@ -38,6 +38,20 @@ create table tbl_vendor_type(
 								updateat timestamp default null ,
 								isactive boolean DEFAULT true
 );
+create table tbl_vendor_flag
+(
+	id smallint(6) auto_increment
+		primary key,
+	flagname varchar(20) not null,
+	entryby int not null,
+	entryat timestamp default CURRENT_TIMESTAMP null,
+	updateby int null,
+	updateat timestamp null,
+	isactive tinyint(1) default 1 null,
+	constraint flagname
+		unique (flagname)
+);
+
 create table tbl_vendors(
 							id int not null primary key auto_increment,
 							vendortypeid smallint not null ,

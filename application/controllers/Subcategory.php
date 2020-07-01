@@ -11,12 +11,16 @@ class Subcategory extends CI_Controller
     public function index()
     {
 		try{
-			$this->load->view('include/header');
-            $this->load->view('include/topbar');
-            $this->load->view('include/sidebar');
-			$this->load->view('Subcategory/frmSubcategory');
-			$this->load->view('include/footer');
-            $this->load->view('Subcategory/subcategory_script');
+			if(isset($this->session->adminLogin['userid'])){
+				$this->load->view('include/header');
+				$this->load->view('include/topbar');
+				$this->load->view('include/sidebar');
+				$this->load->view('Subcategory/frmSubcategory');
+				$this->load->view('include/footer');
+				$this->load->view('Subcategory/subcategory_script');
+			}else{
+				redirect('Welcome/');
+			}
             }catch (Exception $e){
 			$data['message']= "Message:".$e->getMessage();
 			$data['status']=false;
@@ -28,96 +32,88 @@ class Subcategory extends CI_Controller
     public function create_subcategory()
     {
         try {
-                $data = array();
-                $insert = array();
-                $status = true;
-                $request = json_decode(json_encode($_POST), false);
-               $config['upload_path']          = './assets/images/Subcategory';
-            $config['allowed_types']        = 'gif|jpg|png|jpeg';
-            $config['max_size']             = 2048;
-            $config['max_width']            = 2048;
-            $config['max_height']           = 2048;
-            $config['file_name']           = 'subcategoryimage'.date("YmdHis");
-            $this->load->library('upload', $config);
-            if ( $this->upload->do_upload('txtSubimage')){
-                $upload_photo = $this->upload->data();
-                $insert[0]['subcategoryimage']=$upload_photo['file_name'] ;
-            }
-            else{
-                $status=false;
-                $data['data'] = $this->upload->display_errors();
-            }
-                if (isset($request->cboCategory) && preg_match("/^[0-9]{1,2}$/", $request->cboCategory)) {
-                    $insert[0]['catid'] = $request->cboCategory;
-                } else {
-                    $status = false;
-                    $data['data'] = "Category Error";
-                }
-                if (isset($request->txtSubcategory) && preg_match("/[a-zA-Z ]{3,50}$/", $request->txtSubcategory)) {
-                    $insert[0]['subcategoryname'] = $request->txtSubcategory;
-                } else {
-                    $status = false;
-                    $data['data'] = "Subcategory Error";
-                }
-               if(isset($request->txtDescription) && preg_match("/[a-zA-Z ,.\-]{5,500}$/",$request->txtDescription)){
-                $insert[0]['description']=$request->txtDescription;
-               }else{
-                $status=false;
-                $data['data'] = "Description Error";
-              }
-              if($status){
-                if(isset($request->txtid) && is_numeric($request->txtid)){
-                    if($request->txtid>0){
-                        if(isset($this->session->editForm['id']) && $this->session->editForm['id']==$request->txtid){
-                            $insert[0]['updateby'] = $this->session->adminLogin['userid'];
-                            $insert[0]['updateat']=date("Y-m-d H:i:s");
-                            $res=$this->Model_Db->update(6,$insert,"id",$request->txtid);
-                            if($res!=false){
-                                $data['message']="Update successful.";
-                                $data['data']="Data updated successfully.";
-                                $data['status']=true;
-                                $this->session->unset_tempdata('editForm');
-                            }else{
-                                $data['message']="Update failed.";
-                                $data['data']="Data not updated successfully.";
-                                $data['status']=false;
-                            }
+			$data = array();
+			$insert = array();
+			$status = true;
+			$request = json_decode(json_encode($_POST), false);
+			$this->load->library('Image_resize');
+			if($return_val=$this->image_resize->upload_image('txtSubimage','./assets/images/Subcategory')){
+				$insert[0]['subcategoryimage']=$return_val['raw_name'];
+			}else{
+				$status=false;
+				$data['data'] = "Image Upload Error.";
+			}
+			if (isset($request->cboCategory) && preg_match("/^[0-9]{1,2}$/", $request->cboCategory)) {
+				$insert[0]['catid'] = $request->cboCategory;
+			} else {
+				$status = false;
+				$data['data'] = "Category Error";
+			}
+			if (isset($request->txtSubcategory) && preg_match("/[a-zA-Z ]{3,50}$/", $request->txtSubcategory)) {
+				$insert[0]['subcategoryname'] = $request->txtSubcategory;
+			} else {
+				$status = false;
+				$data['data'] = "Subcategory Error";
+			}
+		   if(isset($request->txtDescription) && preg_match("/[a-zA-Z ,.\-]{5,500}$/",$request->txtDescription)){
+			$insert[0]['description']=$request->txtDescription;
+		   }else{
+			$status=false;
+			$data['data'] = "Description Error";
+		  }
+		  if($status){
+			if(isset($request->txtid) && is_numeric($request->txtid)){
+				if($request->txtid>0){
+					if(isset($this->session->editForm['id']) && $this->session->editForm['id']==$request->txtid){
+						$insert[0]['updateby'] = $this->session->adminLogin['userid'];
+						$insert[0]['updateat']=date("Y-m-d H:i:s");
+						$res=$this->Model_Db->update(6,$insert,"id",$request->txtid);
+						if($res!=false){
+							$data['message']="Update successful.";
+							$data['data']="Data updated successfully.";
+							$data['status']=true;
+							$this->session->unset_tempdata('editForm');
+						}else{
+							$data['message']="Update failed.";
+							$data['data']="Data not updated successfully.";
+							$data['status']=false;
+						}
 
-                        }else{
-                            $data['status']=false;
-                            $data['message']='Invalid edit request';
-                            $data['data']='You have exceeded the max time limit of 30 seconds to edit this form.';
-                        }
-                    }else if($request->txtid==0){
+					}else{
+						$data['status']=false;
+						$data['message']='Invalid edit request';
+						$data['data']='You have exceeded the max time limit of 30 seconds to edit this form.';
+					}
+				}else if($request->txtid==0){
 //                        $insert[0]['entryby']=1;
-                        $insert[0]['entryby']=$this->session->adminLogin['userid'];
-                        $insert[0]['entryat']=date("Y-m-d H:i:s");
-                        $res=$this->Model_Db->insert(6,$insert);
-                        if($res!=false){
-                            $data['message']="insert successful.";
-                            $data['data']="Data inserted successfully.";
-                            $data['status']=true;
-                        }else{
-                            $data['message']="Insert failed.";
-                            $data['data']="Data not inserted successfully";
-                            $data['status']=false;
-                        }
-                    }else{
-                        $data['message']="Insufficient/Invalid data.";
-                        $data['data']="Some error occurred.Please try again.";
-                        $data['status']=false;
-                    }
-                }else{
-                    $data['message']="Insufficient/Invalid data.";
-                    $data['data']="Some error occurred.Please try again.";
-                    $data['status']=false;
-                }
-            }else{
-                $data['message']="Insufficient/Invalid data.";
-                $data['status']=false;
-            }
-                echo json_encode($data);
-                exit();
+					$insert[0]['entryby']=$this->session->adminLogin['userid'];
+					$insert[0]['entryat']=date("Y-m-d H:i:s");
+					$res=$this->Model_Db->insert(6,$insert);
+					if($res!=false){
+						$data['message']="insert successful.";
+						$data['data']="Data inserted successfully.";
+						$data['status']=true;
+					}else{
+						$data['message']="Insert failed.";
+						$data['data']="Data not inserted successfully";
+						$data['status']=false;
+					}
+				}else{
+					$data['message']="Insufficient/Invalid data.";
+					$data['data']="Some error occurred.Please try again.";
+					$data['status']=false;
+				}
+			}else{
+				$data['message']="Insufficient/Invalid data.";
+				$data['data']="Some error occurred.Please try again.";
+				$data['status']=false;
+			}
+		}else{
+			$data['message']="Insufficient/Invalid data.";
+			$data['status']=false;
+		}
+			echo json_encode($data);
+			exit();
         } catch (Exception $e) {
             $data['message'] = $e->getMessage();
             $data['status'] = false;

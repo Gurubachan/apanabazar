@@ -21,6 +21,7 @@
 			$.ajax({
 				type:'post',
 				url:"<?=base_url('Product/report_product')?>",
+				data:{subcatid:subcatid},
 				dataType:'json',
 				success :function (data) {
 					if(data.status!=false){
@@ -32,7 +33,7 @@
 								"<td>"+data.data[i].subcatid+"</td>"+
 								"<td>"+data.data[i].productname+"</td>"+
 								"<td>"+data.data[i].hsncode+"</td>"+
-								"<td><img src='<?=base_url("assets/images/Product/")?>"+data.data[i].productimage+"' alt='no logo uploaded' height='100' width='100'></td>"+
+								"<td><img src='<?=base_url("assets/thumbnails/")?>"+data.data[i].productimage+"80X80.jpg' alt='no logo uploaded' height='100' width='100'></td>"+
 								"<td>"+data.data[i].description+"</td>"+
 								"<td class='text-center' id='action"+data.data[i].id+"'>" ;
 							if (data.data[i].isactive==1){

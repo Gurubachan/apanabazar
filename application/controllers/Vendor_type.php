@@ -11,13 +11,16 @@ class Vendor_type extends CI_Controller
     public function index()
     {
         try{
-            $this->load->view('include/header');
-            $this->load->view('include/topbar');
-            $this->load->view('include/sidebar');
-            $this->load->view('vendortype/vendortype');
-            $this->load->view('include/footer');
-            $this->load->view('vendortype/vendorscript');
-
+			if(isset($this->session->adminLogin['userid'])){
+				$this->load->view('include/header');
+				$this->load->view('include/topbar');
+				$this->load->view('include/sidebar');
+				$this->load->view('vendortype/vendortype');
+				$this->load->view('include/footer');
+				$this->load->view('vendortype/vendorscript');
+			}else{
+				redirect('Welcome/');
+			}
         }catch (Exception $e){
             $data['message']= "Message:".$e->getMessage();
             $data['status']=false;
@@ -177,6 +180,28 @@ class Vendor_type extends CI_Controller
             $orderby='id asc';
             $res = $this->Model_Db->select(9, null, $where,$orderby);
             $data[] = "<option value=''>--Select--</option>";
+            if ($res != false) {
+                foreach ($res as $r) {
+                    $data[] = "<option value='$r->id'>$r->typename</option>";
+                }
+            }
+            echo json_encode($data);
+        } catch (Exception $e) {
+            $data['message'] = $e->getMessage();
+            $data['status'] = false;
+            $data['error'] = true;
+            echo json_encode($data);
+        }
+    }
+    public function vendor_type()
+    {
+        try {
+            $data = array();
+            $where = "isactive=true";
+            $request = json_decode(json_encode($_POST), false);
+            $orderby='id asc';
+            $res = $this->Model_Db->select(9, null, $where,$orderby);
+            $data[] = "<option value=''>Vendor Type</option>";
             if ($res != false) {
                 foreach ($res as $r) {
                     $data[] = "<option value='$r->id'>$r->typename</option>";

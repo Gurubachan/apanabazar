@@ -1,12 +1,4 @@
 @charset "UTF-8";
-@font-face {
-	font-family: 'Font Awesome 5 Free';
-	font-style: normal;
-	font-weight: 400;
-	font-display: block;
-	src: url("../webfonts/fa-regular-400.eot");
-	src: url("../webfonts/fa-regular-400.eot?#iefix") format("embedded-opentype"), url("../webfonts/fa-regular-400.woff2") format("woff2"), url("../webfonts/fa-regular-400.woff") format("woff"), url("../webfonts/fa-regular-400.ttf") format("truetype"), url("../webfonts/fa-regular-400.svg#fontawesome") format("svg"); }
-
 /*-----------------------------------------------------------------------------------
 
     Template Name:Multikart
@@ -28,11 +20,11 @@
 /* 7. About CSS  */
 /* 8. Banner Timer CSS  */
 /* 9. Category CSS */
-/* 10. Product Box CSS */
+/* 10. Inventory Box CSS */
 /* 11. Theme tab CSS */
 /* 12. Banner CSS */
 /* 13. Collection Banner CSS */
-/* 14. Product-box slider CSS */
+/* 14. Inventory-box slider CSS */
 /* 15. Modal popup CSS */
 /* 16. Look-book CSS */
 /* 17. Demo css
@@ -148,7 +140,9 @@ button:focus {
 
 section,
 .section-t-space {
-  padding-top: 70px; }
+  /*padding-top: 70px;  commented by bijaya on 03-06-2020*/
+  padding-top: 0;
+}
 
 .section-b-space {
   padding-bottom: 70px; }
@@ -2698,7 +2692,7 @@ header {
       transition: all 0.5s ease; }
 
 /*=====================
-    10.Product Box CSS start
+    10.Inventory Box CSS start
 ==========================*/
 .absolute-product .theme-tab .tab-title .current a {
   font-weight: 700; }
@@ -3961,7 +3955,7 @@ header {
               transform: none; }
 
 /*=====================
-    14.Product-box slider CSS start
+    14.Inventory-box slider CSS start
 ==========================*/
 .layout7-product .product-box {
   padding: 2px; }
@@ -15915,7 +15909,7 @@ div.dataTables_wrapper div.dataTables_paginate {
   .card .card-header {
     background-color: #ffffff;
     border-bottom: none;
-    padding: 30px;
+    /*padding: 30px;*/
     border-bottom: 1px solid #f8f8f9;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px; }
@@ -16391,12 +16385,11 @@ input:focus {
                 top: 9px; }
               .page-main-header .main-header-right .nav-right > ul > li:first-child .search-form .form-group:after {
                 position: absolute;
-				  font-family: 'Font Awesome 5 Free';
-				  font-weight: 900;
-				  content: "\f002";
+                content: "\f002";
+                font-family: FontAwesome;
                 top: 11px;
                 left: 22px;
-                color: #ff8084; }
+                color: #8e8e8e; }
           .page-main-header .main-header-right .nav-right > ul > li:last-child {
             border-left: none;
             padding-right: 0; }
@@ -19629,6 +19622,14 @@ table tbody .border-bottom-warning td {
       display: block; }
       .tab2-card ul li a {
         text-align: center; }
+      /*created by suvam*/
+  .tab2-card-blue ul {
+    display: inherit;
+    margin-bottom: 15px; }
+  .tab2-card-blue ul li {
+    display: block; }
+  .tab2-card-blue ul li a {
+    text-align: center; }
   .profile-table table tbody tr td:first-child {
     min-width: 150px; }
   .account-setting h5 {
@@ -24003,3 +24004,87 @@ body.rtl .account-setting {
     padding-right: 35px; }
     .collection-banner .contain-banner.banner-4 h2 {
       font-size: 15px; } }
+
+/*created by suvam*/
+/*date 10-04-2020*/
+
+
+.bg-primary-blue {
+  background-color: #007bff !important;
+  color: #ffffff; }
+.authentication-box .container .bg-primary-blue {
+  padding: 50px;
+  background-image: url("../images/dashboard/login-bg.png");
+  background-position: center;
+  -webkit-box-shadow: 1px 5px 24px 0 rgba(0, 123, 255, 0.8);
+  box-shadow: 1px 5px 24px 0 rgba(0, 123, 255, 0.8); }
+.tab2-card-blue .nav-tabs .nav-link.active, .tab2-card-blue .nav-tabs .nav-link:focus, .tab2-card-blue .nav-tabs .nav-link:hover {
+  color: #007bff;
+  border-color: transparent;
+  border-bottom: 2px solid #007bff; }
+
+.tab2-card-blue .nav-tabs .nav-item.show .nav-link {
+  border-color: transparent;
+  border-bottom: 2px solid #007bff; }
+
+.tab2-card-blue .nav-tabs .nav-link {
+  color: #333333; }
+.tab2-card-blue .media {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center; }
+.tab2-card-blue .media img {
+  margin-right: 20px; }
+
+.authentication-box .tab2-card-blue .nav-tabs .nav-link {
+  font-size: 18px; }
+
+.tab2-card-blue ul {
+  margin-bottom: 30px;
+  border-bottom: 1px solid #dee2e6; }
+.tab2-card-blue ul li a svg {
+  width: 18px;
+  vertical-align: middle; }
+
+.btn-primary-blue {
+  background-color: #007bff !important;
+  border-color: #007bff !important; }
+.btn-primary-blue.disabled {
+  background-color: #007bff !important;
+  border-color: #007bff !important; }
+.btn-primary-blue:disabled {
+  background-color: #007bff !important;
+  border-color: #007bff !important; }
+.btn-primary-blue:hover, .btn-primary-blue:focus, .btn-primary-blue:active, .btn-primary-blue.active {
+  background-color: #008dd6 !important;
+  border-color: #008dd6 !important; }
+.btn-primary-blue:focus {
+  -webkit-box-shadow: 0 0 0 0.2rem white;
+  box-shadow: 0 0 0 0.2rem white; }
+
+.authentication-box .tab2-card-blue .nav-tabs .nav-link {
+  font-size: 18px; }
+.authentication-box .btn-primary-blue {
+  border-radius: 25px;
+  margin-top: 20px;
+  font-weight: 400;
+  padding: 11px 45px; }
+.txt-primary-blue{
+  color: #007bff !important;
+}
+
+.authentication-box .form-footer .social-blue {
+  margin-bottom: 0;
+  border-bottom: 0; }
+.authentication-box .form-footer .social-blue li {
+  padding: 10px;
+  border-radius: 100%;
+  border: 1px solid #007bff;
+  height: 40px;
+  width: 40px;
+  margin-right: 10px;
+  text-align: center;
+  display: inline-block; }
+/*.authentication-box .custom-checkbox .custom-control-input:checked ~ .custom-control-label-blue::before {*/
+/*	background-color: #007bff; }*/
+

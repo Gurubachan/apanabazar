@@ -8,7 +8,7 @@ CREATE TABLE tbl_company(
     entryby int not null,
     entryat timestamp DEFAULT CURRENT_TIMESTAMP,
     updateby int default null,
-    updateat timestamp default null ,
+    updateat timestamp null ,
     isactive boolean DEFAULT true
 );
 CREATE TABLE tbl_category(
@@ -18,7 +18,7 @@ CREATE TABLE tbl_category(
     description varchar(500) default null,
     entryby int not null,
     entryat timestamp DEFAULT CURRENT_TIMESTAMP,
-    updateby int default null,
+    updateby int null,
     updateat timestamp default null ,
     isactive boolean DEFAULT true
 );
@@ -31,7 +31,7 @@ CREATE TABLE tbl_sub_category(
 			 entryby int not null,
 			 entryat timestamp DEFAULT CURRENT_TIMESTAMP,
 			 updateby int default null,
-			 updateat timestamp default null ,
+			 updateat timestamp null ,
 			 isactive boolean DEFAULT true,
 			 foreign key(catid) references tbl_category(id) on delete restrict on update cascade
 );
@@ -45,7 +45,7 @@ CREATE TABLE tbl_product(
     entryby int not null,
     entryat timestamp DEFAULT CURRENT_TIMESTAMP,
     updateby int default null,
-    updateat timestamp default null ,
+    updateat timestamp null ,
     isactive boolean DEFAULT true,
     foreign key(subcatid) references tbl_sub_category(id) on delete restrict on update cascade
 );

@@ -45,6 +45,7 @@ class Admin extends CI_Controller
 								$data['message']="Password matched.";
 								$data['status']=true;
 								$info=array(
+									'usertype'=>'Admin',
 									'userid'=>$res[0]->id,
 									'companyid'=>$res[0]->companyid,
 									'name'=>$res[0]->name,
@@ -53,7 +54,6 @@ class Admin extends CI_Controller
 									'address'=>$res[0]->address,
 									'contactverified'=>$res[0]->contactverified,
 									'emailverified'=>$res[0]->emailverified,
-									'address'=>$res[0]->address,
 									'iscomplete'=>$res[0]->iscomplete,
 								);
 								$this->session->set_userdata('adminLogin',$info);
@@ -80,4 +80,22 @@ class Admin extends CI_Controller
 			exit();
 		}
 	}
+    public function logout(){
+        try{
+            $data=array();
+            $this->session->sess_destroy();
+            $data['message']="Logout successful.";
+            $data['status']=true;
+            echo json_encode($data);
+            redirect("welcome/");
+            exit();
+        }catch (Exception $e){
+            $data['message']= "Message:".$e->getMessage();
+            $data['status']=false;
+            $data['error']=true;
+            redirect("welcome/");
+            echo json_encode($data);
+            exit();
+        }
+    }
 }

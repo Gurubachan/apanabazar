@@ -25,7 +25,7 @@
                             "<td>"+count+"</td>"+
                             "<td>"+data.data[i].categoryid+"</td>"+
                             "<td>"+data.data[i].subcategoryname+"</td>"+
-                            "<td><img src='<?=base_url("assets/images/Subcategory/")?>"+data.data[i].subcategoryimage+"' alt='no logo uploaded' height='100' width='100'></td>"+
+                            "<td><img src='<?=base_url("assets/thumbnails/")?>"+data.data[i].subcategoryimage+"80X80.jpg' alt='no logo uploaded' height='100' width='100'></td>"+
                             "<td>"+data.data[i].description+"</td>"+
                             "<td class='text-center' id='action"+data.data[i].id+"'>" ;
                         if (data.data[i].isactive==1){

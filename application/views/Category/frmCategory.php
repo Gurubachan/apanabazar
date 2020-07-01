@@ -71,6 +71,3 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
     </div>
     <!-- Container-fluid Ends-->
-</div>
-</div>
-</div>

@@ -7,30 +7,18 @@
 			<div class="card-body">
 				<ul class="nav nav-tabs tab-coupon" id="myTab" role="tablist">
 					<li class="nav-item"><a class="nav-link active show" id="account-tab" data-toggle="tab" href="#account" role="tab" aria-controls="account" aria-selected="true" data-original-title="" title="">Account</a></li>
-					<li class="nav-item"><a class="nav-link" id="permission-tabs" data-toggle="tab" href="#permission" role="tab" aria-controls="permission" aria-selected="false" data-original-title="" title="">Permission</a></li>
+<!--					<li class="nav-item"><a class="nav-link" id="permission-tabs" data-toggle="tab" href="#permission" role="tab" aria-controls="permission" aria-selected="false" data-original-title="" title="">Permission</a></li>-->
 				</ul>
 				<div class="tab-content" id="myTabContent">
 					<div class="tab-pane fade active show" id="account" role="tabpanel" aria-labelledby="account-tab">
-						<form class="needs-validation user-add" id="frmVendorRegister" method="post" enctype="multipart/form-data">
+						<form class="needs-validation user-add" id="frmVendorRegister" action="<?=base_url('VendorRegistration/create_vendor')?>" method="post" enctype="multipart/form-data">
                             <input type="hidden" name="txtid" id="txtid" value="0">
 							<h4>Basic Information</h4>
 							<div class="form-group row">
 								<label for="inputVendorType" class="col-xl-3 col-md-4"><span>*</span> Vendor Type</label>
 								<select class="form-control col-xl-8 col-md-7" id="inputVendorType"  name="inputVendorType">
 									<option value="">Select Vendor Type</option>
-									<option value="1">Proprietorship</option>
-									<option value="1">Pvt Ltd</option>
 								</select>
-							</div>
-                            <div class="form-group row">
-                                <label for="inputVendorType" class="col-xl-3 col-md-4"><span>*</span>Flag ID</label>
-                                <select class="form-control col-xl-8 col-md-7" id="cboflagId"  name="cboflagId">
-                                    <option value="0">Select Vendor ID</option>
-                                </select>
-                            </div>
-							<div class="form-group row">
-								<label for="inputID" class="col-xl-3 col-md-4"><span>*</span> Vendor ID</label>
-								<input type="number" class="form-control col-xl-8 col-md-7" id="inputID" name="inputID" placeholder="Mobile Number Of AB" required>
 							</div>
 							<div class="form-group row">
 								<label for="txtCompanyName" class="col-xl-3 col-md-4"><span>*</span> Company Name</label>
@@ -135,7 +123,7 @@
 								<div class="col-lg-5">
 									<div class="form-group row">
 										<label for="txtIFSC" class="col-xl-3 col-md-4"><span>*</span>IFSC</label>
-										<input type="text" class="form-control col-xl-8 col-md-7" id="txtIFSC" name="txtIFSC">
+										<input type="text" class="form-control col-xl-8 col-md-7" id="txtIFSC" name="txtIFSC" MINLENGTH="11" maxlength="11">
 									</div>
 								</div>
 							</div>
@@ -175,165 +163,213 @@
 										<input type="text" class="form-control col-xl-8 col-md-7" id="txtPANnumber" name="txtPANnumber" >
 									</div>
 								</div>
+                                <div class="col-lg-5">
+                                    <div class="form-group row">
+                                        <label for="imgVendor" class="col-xl-3 col-md-4"><span>*</span> Photo</label>
+                                        <input type="file" class="form-control col-xl-8 col-md-7" id="imgVendor" name="imgVendor" >
+                                    </div>
+                                </div>
 							</div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group row">
+                                        <label for="txtPassword" class="col-xl-3 col-md-4"><span>*</span> Passwrod</label>
+                                        <input type="password" class="form-control col-xl-8 col-md-7" id="txtPassword" name="txtPassword" minlength="8" maxlength="16" >
+                                    </div>
+                                </div>
+                                <div class="col-lg-5">
+                                    <div class="form-group row">
+                                        <label for="txtReEnterPassword" class="col-xl-3 col-md-4"><span>*</span> Re-enter passwrod</label>
+                                        <input type="password" class="form-control col-xl-8 col-md-7" id="txtReEnterPassword" name="txtReEnterPassword" minlength="8" maxlength="16">
+                                    </div>
+                                </div>
 
+                            </div>
+                            <div class="row text-center">
+                                <div class="col-lg-12">
+                                    <small id="p_error" style="color: red; display: none;">password mismatch</small>
+                                </div>
+                            </div>
+							<div class="pull-right">
+								<button type="submit" id="btnSubmit" name="btnSubmit" class="btn btn-primary">Save</button>
+							</div>
 						</form>
 
 					</div>
-					<div class="tab-pane fade" id="permission" role="tabpanel" aria-labelledby="permission-tabs">
-						<form class="needs-validation user-add" id="frmPermissions" enctype="multipart/form-data">
-							<h4>Permission</h4>
-							<div class="permission-block">
-								<div class="attribute-blocks">
-									<h5 class="f-w-600 mb-3">Product Related permition </h5>
-									<div class="row">
-										<div class="col-xl-3 col-sm-4">
-											<label>Add Product</label>
-										</div>
-										<div class="col-xl-9 col-sm-8">
-											<div class="form-group m-checkbox-inline mb-0 custom-radio-ml d-flex radio-animated">
-												<label class="d-block" for="edo-ani1">
-													<input class="radio_animated" id="edo-ani1" type="radio" name="rdo-ani">
-													Allow
-												</label>
-												<label class="d-block" for="edo-ani2">
-													<input class="radio_animated" id="edo-ani2" type="radio" name="rdo-ani" checked="">
-													Deny
-												</label>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-xl-3 col-sm-4">
-											<label>Update Product</label>
-										</div>
-										<div class="col-xl-9 col-sm-8">
-											<div class="form-group m-checkbox-inline mb-0 custom-radio-ml d-flex radio-animated">
-												<label class="d-block" for="edo-ani3">
-													<input class="radio_animated" id="edo-ani3" type="radio" name="rdo-ani1">
-													Allow
-												</label>
-												<label class="d-block" for="edo-ani4">
-													<input class="radio_animated" id="edo-ani4" type="radio" name="rdo-ani1" checked="">
-													Deny
-												</label>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-xl-3 col-sm-4">
-											<label>Delete Product</label>
-										</div>
-										<div class="col-xl-9 col-sm-8">
-											<div class="form-group m-checkbox-inline mb-0 custom-radio-ml d-flex radio-animated">
-												<label class="d-block" for="edo-ani5">
-													<input class="radio_animated" id="edo-ani5" type="radio" name="rdo-ani2">
-													Allow
-												</label>
-												<label class="d-block" for="edo-ani6">
-													<input class="radio_animated" id="edo-ani6" type="radio" name="rdo-ani2" checked="">
-													Deny
-												</label>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-xl-3 col-sm-4">
-											<label class="mb-0 sm-label-radio">Apply Discount</label>
-										</div>
-										<div class="col-xl-9 col-sm-8">
-											<div class="form-group m-checkbox-inline mb-0 custom-radio-ml d-flex radio-animated pb-0">
-												<label class="d-block mb-0" for="edo-ani7">
-													<input class="radio_animated" id="edo-ani7" type="radio" name="rdo-ani3">
-													Allow
-												</label>
-												<label class="d-block mb-0" for="edo-ani8">
-													<input class="radio_animated" id="edo-ani8" type="radio" name="rdo-ani3" checked="">
-													Deny
-												</label>
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="attribute-blocks">
-									<h5 class="f-w-600 mb-3">Category Related permition </h5>
-									<div class="row">
-										<div class="col-xl-3 col-sm-4">
-											<label>Add Category</label>
-										</div>
-										<div class="col-xl-9 col-sm-8">
-											<div class="form-group m-checkbox-inline mb-0 custom-radio-ml d-flex radio-animated">
-												<label class="d-block" for="edo-ani9">
-													<input class="radio_animated" id="edo-ani9" type="radio" name="rdo-ani4">
-													Allow
-												</label>
-												<label class="d-block" for="edo-ani10">
-													<input class="radio_animated" id="edo-ani10" type="radio" name="rdo-ani4" checked="">
-													Deny
-												</label>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-xl-3 col-sm-4">
-											<label>Update Category</label>
-										</div>
-										<div class="col-xl-9 col-sm-8">
-											<div class="form-group m-checkbox-inline mb-0 custom-radio-ml d-flex radio-animated">
-												<label class="d-block" for="edo-ani11">
-													<input class="radio_animated" id="edo-ani11" type="radio" name="rdo-ani5">
-													Allow
-												</label>
-												<label class="d-block" for="edo-ani12">
-													<input class="radio_animated" id="edo-ani12" type="radio" name="rdo-ani5" checked="">
-													Deny
-												</label>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-xl-3 col-sm-4">
-											<label>Delete Category</label>
-										</div>
-										<div class="col-xl-9 col-sm-8">
-											<div class="form-group m-checkbox-inline mb-0 custom-radio-ml d-flex radio-animated">
-												<label class="d-block" for="edo-ani13">
-													<input class="radio_animated" id="edo-ani13" type="radio" name="rdo-ani6">
-													Allow
-												</label>
-												<label class="d-block" for="edo-ani14">
-													<input class="radio_animated" id="edo-ani14" type="radio" name="rdo-ani6" checked="">
-													Deny
-												</label>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-xl-3 col-sm-4">
-											<label class="mb-0 sm-label-radio">Apply discount</label>
-										</div>
-										<div class="col-xl-9 col-sm-8">
-											<div class="form-group m-checkbox-inline custom-radio-ml d-flex radio-animated pb-0">
-												<label class="d-block mb-0" for="edo-ani15">
-													<input class="radio_animated" id="edo-ani15" type="radio" name="rdo-ani7">
-													Allow
-												</label>
-												<label class="d-block mb-0" for="edo-ani16">
-													<input class="radio_animated" id="edo-ani16" type="radio" name="rdo-ani7" checked="">
-													Deny
-												</label>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>
-				<div class="pull-right">
-					<button type="submit" id="btnSubmit" name="btnSubmit" class="btn btn-primary">Save</button>
+<!--					<div class="tab-pane fade" id="permission" role="tabpanel" aria-labelledby="permission-tabs">-->
+<!--						<form class="needs-validation user-add" id="frmPermissions" enctype="multipart/form-data">-->
+<!--							<h4>Permission</h4>-->
+<!--							<div class="permission-block">-->
+<!--								<div class="attribute-blocks">-->
+<!--									<h5 class="f-w-600 mb-3">Product Related permition </h5>-->
+<!--									<div class="row">-->
+<!--										<div class="col-xl-3 col-sm-4">-->
+<!--											<label>Add Product</label>-->
+<!--										</div>-->
+<!--										<div class="col-xl-9 col-sm-8">-->
+<!--											<div class="form-group m-checkbox-inline mb-0 custom-radio-ml d-flex radio-animated">-->
+<!--												<label class="d-block" for="edo-ani1">-->
+<!--													<input class="radio_animated" id="edo-ani1" type="radio" name="rdo-ani">-->
+<!--													Allow-->
+<!--												</label>-->
+<!--												<label class="d-block" for="edo-ani2">-->
+<!--													<input class="radio_animated" id="edo-ani2" type="radio" name="rdo-ani" checked="">-->
+<!--													Deny-->
+<!--												</label>-->
+<!--											</div>-->
+<!--										</div>-->
+<!--									</div>-->
+<!--									<div class="row">-->
+<!--										<div class="col-xl-3 col-sm-4">-->
+<!--											<label>Update Product</label>-->
+<!--										</div>-->
+<!--										<div class="col-xl-9 col-sm-8">-->
+<!--											<div class="form-group m-checkbox-inline mb-0 custom-radio-ml d-flex radio-animated">-->
+<!--												<label class="d-block" for="edo-ani3">-->
+<!--													<input class="radio_animated" id="edo-ani3" type="radio" name="rdo-ani1">-->
+<!--													Allow-->
+<!--												</label>-->
+<!--												<label class="d-block" for="edo-ani4">-->
+<!--													<input class="radio_animated" id="edo-ani4" type="radio" name="rdo-ani1" checked="">-->
+<!--													Deny-->
+<!--												</label>-->
+<!--											</div>-->
+<!--										</div>-->
+<!--									</div>-->
+<!--									<div class="row">-->
+<!--										<div class="col-xl-3 col-sm-4">-->
+<!--											<label>Delete Product</label>-->
+<!--										</div>-->
+<!--										<div class="col-xl-9 col-sm-8">-->
+<!--											<div class="form-group m-checkbox-inline mb-0 custom-radio-ml d-flex radio-animated">-->
+<!--												<label class="d-block" for="edo-ani5">-->
+<!--													<input class="radio_animated" id="edo-ani5" type="radio" name="rdo-ani2">-->
+<!--													Allow-->
+<!--												</label>-->
+<!--												<label class="d-block" for="edo-ani6">-->
+<!--													<input class="radio_animated" id="edo-ani6" type="radio" name="rdo-ani2" checked="">-->
+<!--													Deny-->
+<!--												</label>-->
+<!--											</div>-->
+<!--										</div>-->
+<!--									</div>-->
+<!--									<div class="row">-->
+<!--										<div class="col-xl-3 col-sm-4">-->
+<!--											<label class="mb-0 sm-label-radio">Apply Discount</label>-->
+<!--										</div>-->
+<!--										<div class="col-xl-9 col-sm-8">-->
+<!--											<div class="form-group m-checkbox-inline mb-0 custom-radio-ml d-flex radio-animated pb-0">-->
+<!--												<label class="d-block mb-0" for="edo-ani7">-->
+<!--													<input class="radio_animated" id="edo-ani7" type="radio" name="rdo-ani3">-->
+<!--													Allow-->
+<!--												</label>-->
+<!--												<label class="d-block mb-0" for="edo-ani8">-->
+<!--													<input class="radio_animated" id="edo-ani8" type="radio" name="rdo-ani3" checked="">-->
+<!--													Deny-->
+<!--												</label>-->
+<!--											</div>-->
+<!--										</div>-->
+<!--									</div>-->
+<!--								</div>-->
+<!--								<div class="attribute-blocks">-->
+<!--									<h5 class="f-w-600 mb-3">Category Related permition </h5>-->
+<!--									<div class="row">-->
+<!--										<div class="col-xl-3 col-sm-4">-->
+<!--											<label>Add Category</label>-->
+<!--										</div>-->
+<!--										<div class="col-xl-9 col-sm-8">-->
+<!--											<div class="form-group m-checkbox-inline mb-0 custom-radio-ml d-flex radio-animated">-->
+<!--												<label class="d-block" for="edo-ani9">-->
+<!--													<input class="radio_animated" id="edo-ani9" type="radio" name="rdo-ani4">-->
+<!--													Allow-->
+<!--												</label>-->
+<!--												<label class="d-block" for="edo-ani10">-->
+<!--													<input class="radio_animated" id="edo-ani10" type="radio" name="rdo-ani4" checked="">-->
+<!--													Deny-->
+<!--												</label>-->
+<!--											</div>-->
+<!--										</div>-->
+<!--									</div>-->
+<!--									<div class="row">-->
+<!--										<div class="col-xl-3 col-sm-4">-->
+<!--											<label>Update Category</label>-->
+<!--										</div>-->
+<!--										<div class="col-xl-9 col-sm-8">-->
+<!--											<div class="form-group m-checkbox-inline mb-0 custom-radio-ml d-flex radio-animated">-->
+<!--												<label class="d-block" for="edo-ani11">-->
+<!--													<input class="radio_animated" id="edo-ani11" type="radio" name="rdo-ani5">-->
+<!--													Allow-->
+<!--												</label>-->
+<!--												<label class="d-block" for="edo-ani12">-->
+<!--													<input class="radio_animated" id="edo-ani12" type="radio" name="rdo-ani5" checked="">-->
+<!--													Deny-->
+<!--												</label>-->
+<!--											</div>-->
+<!--										</div>-->
+<!--									</div>-->
+<!--									<div class="row">-->
+<!--										<div class="col-xl-3 col-sm-4">-->
+<!--											<label>Delete Category</label>-->
+<!--										</div>-->
+<!--										<div class="col-xl-9 col-sm-8">-->
+<!--											<div class="form-group m-checkbox-inline mb-0 custom-radio-ml d-flex radio-animated">-->
+<!--												<label class="d-block" for="edo-ani13">-->
+<!--													<input class="radio_animated" id="edo-ani13" type="radio" name="rdo-ani6">-->
+<!--													Allow-->
+<!--												</label>-->
+<!--												<label class="d-block" for="edo-ani14">-->
+<!--													<input class="radio_animated" id="edo-ani14" type="radio" name="rdo-ani6" checked="">-->
+<!--													Deny-->
+<!--												</label>-->
+<!--											</div>-->
+<!--										</div>-->
+<!--									</div>-->
+<!--									<div class="row">-->
+<!--										<div class="col-xl-3 col-sm-4">-->
+<!--											<label class="mb-0 sm-label-radio">Apply discount</label>-->
+<!--										</div>-->
+<!--										<div class="col-xl-9 col-sm-8">-->
+<!--											<div class="form-group m-checkbox-inline custom-radio-ml d-flex radio-animated pb-0">-->
+<!--												<label class="d-block mb-0" for="edo-ani15">-->
+<!--													<input class="radio_animated" id="edo-ani15" type="radio" name="rdo-ani7">-->
+<!--													Allow-->
+<!--												</label>-->
+<!--												<label class="d-block mb-0" for="edo-ani16">-->
+<!--													<input class="radio_animated" id="edo-ani16" type="radio" name="rdo-ani7" checked="">-->
+<!--													Deny-->
+<!--												</label>-->
+<!--											</div>-->
+<!--										</div>-->
+<!--									</div>-->
+<!--								</div>-->
+<!--							</div>-->
+<!--						</form>-->
+<!--					</div>-->
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
+<div class="container-fluid">
+    <div class="table-responsive">
+        <table class='table table-bordered table-striped' id="showtablereport">
+            <thead class="bg-secondary text-white">
+            <tr >
+                <th class="text-center">Sl.no</th>
+                <!--                <th class="text-center">Category</th>-->
+                <!--                <th class="text-center">Subcategory</th>-->
+                <th class="text-center">Product ID</th>
+                <th class="text-center">Brand ID</th>
+                <th class="text-center">Item Name</th>
+                <th class="text-center">MRP</th>
+                <th class="text-center">Taxrate</th>
+                <th class="text-center">Unit</th>
+                <th class="text-center">Quantity</th>
+                <th class="text-center">Dimension</th>
+                <!--                <th class="text-center">Action</th>-->
+            </tr>
+            </thead>
+            <tbody id="showReportItemList"></tbody>
+        </table>
+    </div>
 </div>

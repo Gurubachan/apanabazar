@@ -9,7 +9,34 @@ class DataInsert extends CI_Controller
 	{
 		parent::__construct();
 	}
-	public function admin_creation(){
+	public function company_creation(){
+		try{
+			$data=array(
+				array(
+					'name'=>'Apanabazar Ecommerce Private Limited',
+					'address'=>'At-Apanabazar,po-Apanabazar,Dist-Apanabazar',
+					'pannumber'=>'APNAB1234Z',
+					'gstnumber'=>'GSTNAPNAB1234ZAR',
+					'logo'=>'logogogogoogog',
+					'entryby'=>1
+				)
+			);
+			$res=$this->Model_Db->insert(3,$data);
+			if($res!=false){
+				echo "Company Creatred successfully";
+				$this->admin_creation();
+			}else{
+				echo "Some error occoured.";
+			}
+		}catch (Exception $e){
+			$data['message']= "Message:".$e->getMessage();
+			$data['status']=false;
+			$data['error']=true;
+			echo json_encode($data);
+			exit();
+		}
+	}
+	private function admin_creation(){
 		try{
 			$data=array(
 				array(

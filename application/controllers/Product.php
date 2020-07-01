@@ -11,12 +11,16 @@ class Product extends CI_Controller
     public function index()
     {
         try{
-            $this->load->view('include/header');
-            $this->load->view('include/topbar');
-            $this->load->view('include/sidebar');
-            $this->load->view('Product/frmProduct');
-            $this->load->view('include/footer');
-            $this->load->view('Product/product_script');
+			if(isset($this->session->adminLogin['userid'])){
+				$this->load->view('include/header');
+				$this->load->view('include/topbar');
+				$this->load->view('include/sidebar');
+				$this->load->view('Product/frmProduct');
+				$this->load->view('include/footer');
+				$this->load->view('Product/product_script');
+			}else{
+				redirect('Welcome/');
+			}
         }catch (Exception $e){
             $data['message']= "Message:".$e->getMessage();
             $data['status']=false;
@@ -31,17 +35,13 @@ class Product extends CI_Controller
             $insert=array();
             $status=true;
             $request = json_decode(json_encode($_POST), false);
-            $config['upload_path']          = './assets/images/Product';
-            $config['allowed_types']        = 'gif|jpg|png|jpeg';
-            $config['max_size']             = 2048;
-            $config['max_width']            = 2048;
-            $config['max_height']           = 2048;
-            $config['file_name']           = 'productimage'.date("YmdHis");
-            $this->load->library('upload', $config);
-            if ( $this->upload->do_upload('txtImage')){
-                $upload_photo = $this->upload->data();
-                $insert[0]['productimage']=$upload_photo['file_name'] ;
-            }
+			$this->load->library('Image_resize');
+			if($return_val=$this->image_resize->upload_image('txtImage','./assets/images/Product')){
+				$insert[0]['productimage']=$return_val['raw_name'];
+			}else{
+				$status=false;
+				$data['data'] = "Image Upload Error.";
+			}
             if (isset($request->cboSubcategory) && preg_match("/[0-9]{1,2}$/", $request->cboSubcategory)) {
                 $insert[0]['subcatid'] = $request->cboSubcategory;
             } else {
@@ -58,9 +58,9 @@ class Product extends CI_Controller
                 $insert[0]['hsncode']=$request->txtHsncode ;
             }else{
                 $status=false;
-                $data['data'] = "productname Error";
+                $data['data'] = "hsn code error";
             }
-            if(isset($request->txtDescription) && preg_match("/^[a-zA-Z ,.\-]{5,500}$/",$request->txtDescription)){
+            if(isset($request->txtDescription) && preg_match("/[a-zA-Z ,.\-]{5,500}$/",$request->txtDescription)){
                 $insert[0]['description']=$request->txtDescription;
             }else{
                 $status=false;
@@ -140,7 +140,7 @@ class Product extends CI_Controller
             }else{
                 $data['status']=false;
                 $data['message'] = "Subcatid Not found.";
-                $data['data'] = "Please Select a state to View Report.";
+                $data['data'] = "Please Select a subcategory to View Report.";
                 echo json_encode($data);
                 exit();
             }
@@ -219,7 +219,7 @@ class Product extends CI_Controller
             $where="isactive=true";
             $request = json_decode(json_encode($_POST), false);
             if(isset($request->subcatid) && is_numeric($request->subcatid) && $request->subcatid>0){
-                $where.=" and caid=$request->subcatid";
+                $where.=" and subcatid=$request->subcatid";
             }else{
                 $data['data']="Invalid Subid.";
                 $data['message']="Bad request.";
@@ -294,6 +294,28 @@ class Product extends CI_Controller
                 $data['data']="Invalid request generated.";
                 echo json_encode($data);
             }
+        }catch (Exception $e){
+            $data['message']= $e->getMessage();
+            $data['status']=false;
+            $data['error']=true;
+            echo json_encode($data);
+        }
+    }
+    public function load_product_list(){
+        try{
+            $data=array();
+            $where="isactive=true";
+            $request = json_decode(json_encode($_POST), false);
+            $orderby="id asc";
+            $res=$this->Model_Db->select(4,null,$where,$orderby);
+            $data[]="<option value=''>Select</option>";
+            if($res!=false){
+                foreach ($res as $r){
+                    $data[]="<option value='$r->id'>$r->hsncode - $r->productname</option>";
+                }
+            }
+            echo json_encode($data);
+
         }catch (Exception $e){
             $data['message']= $e->getMessage();
             $data['status']=false;

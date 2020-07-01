@@ -23,7 +23,7 @@
     <link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/all.css')?>">
 
     <!-- Flag icon-->
-    <link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/themify.css')?>">
+<!--    <link rel="stylesheet" type="text/css" href="--><?//=base_url('assets/css/themify.css')?><!--">-->
 
     <!-- slick icon-->
     <link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/slick.css')?>">
@@ -37,7 +37,7 @@
 
     <!-- App css-->
     <link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/admin.css')?>">
-
+    <link rel="stylesheet" type="text/css" href="<?=base_url('assets/css/toastr.css')?>">
 </head>
 
 <body>
@@ -48,7 +48,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-5 p-0 card-left">
-                        <div class="card bg-primary">
+                        <div class="card bg-primary-blue" id="cardHead">
                             <div class="svg-icon">
 
                             </div>
@@ -61,96 +61,116 @@
                                             Lorem Ipsum has been the industry's standard dummy.</p>
                                     </div>
                                 </div>
+                                <div>
+                                    <div>
+                                        <h3>Welcome to ApanaBazar</h3>
+                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                            Lorem Ipsum has been the industry's standard dummy.</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <h3>Welcome to ApanaBazar</h3>
+                                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                                            Lorem Ipsum has been the industry's standard dummy.</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-7 p-0 card-right">
-                        <div class="card tab2-card">
+                        <div class="card tab2-card-blue" id="usertypelabel">
                             <div class="card-body">
                                 <ul class="nav nav-tabs nav-material" id="top-tab" role="tablist">
-                                    <li class="nav-item">
+                                    <li class="nav-item" id="navItemVendor">
                                         <a class="nav-link active" id="top-profile-tab" data-toggle="tab"
                                             href="#top-profile" role="tab" aria-controls="top-profile"
-                                            aria-selected="true"><span class="fas fa-user"></span> <span>Login</span></a>
+                                            aria-selected="true"><span class="fa fa-user"></span>&nbsp;Vendor Login</a>
                                     </li>
-                                    <li class="nav-item">
+                                    <li class="nav-item" id="navItemAdmin">
                                         <a class="nav-link" id="contact-top-tab" data-toggle="tab" href="#top-contact"
                                             role="tab" aria-controls="top-contact" aria-selected="false"><span
-                                                class="fas fa-unlock-alt"></span> <span>Register</span></a>
+                                                class="fa fa-user"></span>&nbsp;Admin Login</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content" id="top-tabContent">
                                     <div class="tab-pane fade show active" id="top-profile" role="tabpanel"
                                         aria-labelledby="top-profile-tab">
-                                        <form class="form-horizontal auth-form" id="frmLogin">
+                                        <form class="form-horizontal auth-form" id="frmVendorLogin">
                                             <div class="form-group">
                                                 <input required="" name="username" type="text"
-                                                    class="form-control" placeholder="Email Id or Mobile Number" id="exampleInputEmail1">
+                                                    class="form-control" placeholder="Enter mobile or emailid" id="exampleInputEmail1">
                                             </div>
                                             <div class="form-group">
                                                 <input required="" name="password" type="password"
-                                                    class="form-control" placeholder="Password">
-                                            </div>
-                                            <div class="form-terms">
-                                                <div class="custom-control custom-checkbox mr-sm-2">
-                                                    <input type="checkbox" class="custom-control-input"
-                                                        id="customControlAutosizing">
-                                                    <label class="custom-control-label"
-                                                        for="customControlAutosizing">Remember me</label>
-                                                    <a href="#" class="btn btn-default forgot-pass">lost your
-                                                        password</a>
-                                                </div>
-                                            </div>
-                                            <div class="form-button">
-                                                <button class="btn btn-primary" type="submit">Login</button>
-                                            </div>
-                                            <div class="form-footer">
-                                                <span>Or Login up with social platforms</span>
-                                                <ul class="social">
-                                                    <li><a class="fab fa-facebook-f" style="color:#ff8084" href="#"></a></li>
-                                                    <li><a class="fab fa-twitter" style="color:#ff8084" href="#"></a></li>
-                                                    <li><a class="fab fa-instagram" style="color:#ff8084" href="#"></a></li>
-                                                    <li><a class="fab fa-pinterest" style="color:#ff8084" href="#"></a></li>
-                                                </ul>
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div class="tab-pane fade" id="top-contact" role="tabpanel"
-                                        aria-labelledby="contact-top-tab">
-                                        <form class="form-horizontal auth-form">
-                                            <div class="form-group">
-                                                <input required="" name="login[username]" type="email"
-                                                    class="form-control" placeholder="Username"
-                                                    id="exampleInputEmail12">
-                                            </div>
-                                            <div class="form-group">
-                                                <input required="" name="login[password]" type="password"
-                                                    class="form-control" placeholder="Password">
-                                            </div>
-                                            <div class="form-group">
-                                                <input required="" name="login[password]" type="password"
-                                                    class="form-control" placeholder="Confirm Password">
+                                                    class="form-control" placeholder="Enter password">
                                             </div>
                                             <div class="form-terms">
                                                 <div class="custom-control custom-checkbox mr-sm-2">
                                                     <input type="checkbox" class="custom-control-input"
                                                         id="customControlAutosizing1">
                                                     <label class="custom-control-label"
-                                                        for="customControlAutosizing1"><span>I agree all statements in
-                                                            <a href="#" class="pull-right">Terms &amp;
-                                                                Conditions</a></span></label>
+                                                        for="customControlAutosizing1">Remember me</label>
+                                                    <a href="<?=base_url('welcome/other_login')?>" class="forgot-pass txt-primary-blue">Other Login</a><br>
+                                                    <a href="<?=base_url('welcome/forgot_password')?>" class="forgot-pass txt-primary-blue">Lost your password?</a>
                                                 </div>
                                             </div>
-                                            <div class="form-button">
-                                                <button class="btn btn-primary" type="submit">Register</button>
+                                           <div class="row">
+                                               <div class="form-button ml-3">
+                                                   <button class="btn btn-primary-blue" type="submit">Login</button>
+                                               </div>
+                                               <div class="form-button" style="display: none;" id="spinner_shows">
+                                                   <span style="padding-left: 85px;"><i class="fa fa-spinner fa-spin fa-2x"></i></span>
+                                               </div>
+                                           </div>
+                                            <a href="<?=base_url('Vendor/new_registrtion')?>" class="btn btn-default forgot-pass txt-primary-blue" id="vendorRegister"><u>Register</u></a>
+                                            <div class="form-footer">
+                                                <span>Or Login up with social platforms</span>
+                                                <ul class="social-blue">
+                                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                                    <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                                    <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="tab-pane fade" id="top-contact" role="tabpanel"
+                                        aria-labelledby="contact-top-tab">
+                                        <form class="form-horizontal auth-form" id="frmAdminLogin">
+                                            <div class="form-group">
+                                                <input required="" name="username" type="text"
+                                                       class="form-control" placeholder="Enter mobile or emailid" id="exampleInputEmail1">
+                                            </div>
+                                            <div class="form-group">
+                                                <input required="" name="password" type="password"
+                                                       class="form-control" placeholder="Enter password">
+                                            </div>
+                                            <div class="form-terms">
+                                                <div class="custom-control custom-checkbox mr-sm-2">
+                                                    <input type="checkbox" class="custom-control-input"
+                                                           id="customControlAutosizing">
+                                                    <label class="custom-control-label"
+                                                           for="customControlAutosizing">Remember me</label>
+                                                    <a href="<?=base_url('welcome/other_login')?>" class="forgot-pass">Other Login</a><br>
+                                                    <a href="<?=base_url('welcome/forgot_password')?>" class="forgot-pass">Lost your password?</a>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="form-button">
+                                                    <button class="btn btn-primary" type="submit">Login</button>
+                                                </div>
+                                                <div class="form-button" style="display: none;" id="spinner_shows_admin">
+                                                    <span style="padding-left: 85px;"><i class="fa fa-spinner fa-spin fa-2x"></i></span>
+                                                </div>
                                             </div>
                                             <div class="form-footer">
-                                                <span>Or Sign up with social platforms</span>
+                                                <span>Or Login up with social platforms</span>
                                                 <ul class="social">
-                                                    <li><a class="fab fa-facebook-f" style="color:#ff8084" href="#"></a></li>
-                                                    <li><a class="fab fa-twitter" style="color:#ff8084" href="#"></a></li>
-                                                    <li><a class="fab fa-instagram" style="color:#ff8084" href="#"></a></li>
-                                                    <li><a class="fab fa-pinterest" style="color:#ff8084" href="#"></a></li>
+                                                    <li><a class="icon-facebook" href="#"></a></li>
+                                                    <li><a class="icon-twitter" href="#"></a></li>
+                                                    <li><a class="icon-instagram" href="#"></a></li>
+                                                    <li><a class="icon-pinterest" href="#"></a></li>
                                                 </ul>
                                             </div>
                                         </form>
@@ -171,9 +191,6 @@
     <!-- Bootstrap js-->
     <script src="<?=base_url('assets/js/popper.min.js')?>"></script>
     <script src="<?=base_url('assets/js/bootstrap.js')?>"></script>
-
-    <!--Font-Awesome js-->
-    <<script src="<?=base_url('assets/js/all.js')?>"></script>
 
     <!-- feather icon js-->
     <script src="<?=base_url('assets/js/icons/feather-icon/feather.min.js')?>"></script>
@@ -196,13 +213,23 @@
 
     <!--script admin-->
     <script src="<?=base_url('assets/js/admin-script.js')?>"></script>
+    <script src="<?=base_url('assets/js/toastr.js')?>"></script>
     <script>
         $('.single-item').slick({
             arrows: false,
             dots: true
         });
-        $("#frmLogin").submit(function (e) {
+        $("#navItemVendor").click(function () {
+            $("#cardHead").removeClass('bg-primary').addClass('bg-primary-blue');
+            $("#usertypelabel").removeClass('tab2-card').addClass('tab2-card-blue');
+        });
+        $("#navItemAdmin").click(function () {
+            $("#cardHead").removeClass('bg-primary-blue').addClass('bg-primary');
+            $("#usertypelabel").removeClass('tab2-card-blue').addClass('tab2-card');
+        });
+		$("#frmAdminLogin").submit(function (e) {
 			e.preventDefault();
+			$("#spinner_shows_admin").show();
 			$.ajax({
 				type: 'post',
 				url:"<?=base_url('Admin/check_login')?>",
@@ -212,16 +239,94 @@
 				contentType: false,
 				cache: false,
 				success: function (data) {
+                    $("#spinner_shows_admin").hide();
 					if (data.status==true){
 						window.location.href="<?=base_url('Dashboard/')?>";
 					} else {
-						alert(data.message);
+						// alert(data.message);
+                        mytoast(data);
 					}
-				}
+				},
+                error : function(error){
+                    $("#spinner_shows_admin").hide();
+                    JSON.stringify(error);
+                    if(error.status == 500){
+                        var str =  JSON.stringify(error.responseText);
+                        var pos1 = str.indexOf("<p>",str.search("</p>"));
+                        var pos = str.indexOf("</p>",pos1);
+                        var res=[];
+                        res['title']="Error";
+                        res['message']=str.slice(pos1, pos);
+                    }else if( error.status == 404){
+                        var str =  JSON.stringify(error.responseText);
+                        var pos1 = str.search("<p>");
+                        var pos = str.search("</p>");
+                        var res=[];
+                        res['title']="Error";
+                        res['message']=str.slice(pos1, pos);
+                    }
+                    mytoast(res);
+                }
 			});
 		});
+		$("#frmVendorLogin").submit(function (e) {
+		    $("#spinner_shows").show();
+			e.preventDefault();
+			$.ajax({
+				type: 'post',
+				url:"<?=base_url('Vendor/check_login')?>",
+				data: new FormData(this),
+				dataType: 'json',
+				processData: false,
+				contentType: false,
+				cache: false,
+				success: function (data) {
+                    $("#spinner_shows").hide();
+					if (data.status==true){
+						window.location.href="<?=base_url('Dashboard/')?>";
+					} else {
+						// alert(data.message);
+                        mytoast(data);
+					}
+				},
+                error : function(error){
+                    $("#spinner_shows").hide();
+                    JSON.stringify(error);
+                    if(error.status == 500){
+                        var str =  JSON.stringify(error.responseText);
+                        var pos1 = str.indexOf("<p>",str.search("</p>"));
+                        var pos = str.indexOf("</p>",pos1);
+                        var res=[];
+                        res['title']="Error";
+                        res['message']=str.slice(pos1, pos);
+                    }else if( error.status == 404){
+                        var str =  JSON.stringify(error.responseText);
+                        var pos1 = str.search("<p>");
+                        var pos = str.search("</p>");
+                        var res=[];
+                        res['title']="Error";
+                        res['message']=str.slice(pos1, pos);
+                    }
+                    mytoast(res);
+                }
+			});
+		});
+        function mytoast(res) {
+            var title = res.title;
+            var msg = res.message;
+            if(res.status== true){
+                // toastr.options.rtl = true;
+                toastr.options.positionClass = 'toast-bottom-right';
+                toastr.success(msg,title);
+                toastr.options.showMethod = 'slideDown';
+            }else {
+                // toastr.options.rtl = true;
+                toastr.options.positionClass = 'toast-bottom-right';
+                toastr.error(msg,title);
+                toastr.options.showMethod = 'slideDown';
+            }
+        }
     </script>
-
 </body>
 
 
