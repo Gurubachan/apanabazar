@@ -268,64 +268,64 @@ class Batch extends CI_Controller
         }
     }
     public function isactive_batch(){
-        try{
-            if(isset($this->session->adminLogin['userid'])){
-                $request=json_decode(json_encode($_POST));
-                $data=array();
-                if(isset($request->rowid) && is_numeric($request->rowid) && $request->rowid>0){
-                    $where="id=$request->rowid ";
-                    $update=array();
-                    $update[]=array(
-                        'updateby'=>$this->session->adminLogin['userid'],
-                        'updateat'=>date('Y-m-d H:i:s')
-                    );
-                    if(isset($request->isactive) && is_numeric($request->isactive)){
-                        if ($request->isactive==1){
-                            $update[0]['isactive']=false;
-                            $where.=" and isactive=true";
-                        }elseif ($request->isactive==0){
-                            $update[0]['isactive']=true;
-                            $where.=" and isactive=false";
-                        }else{
-                            $data['status']=false;
-                            $data['message']="Bad request";
-                            $data['data']="Invalid request for delete";
-                            echo json_encode($data);
-                            exit();
-                        }
-                    }
-                    $res=$this->Model_Db->select(16,null,$where);
-                    if($res!=false){
-                        $result=$this->Model_Db->update(16,$update,'id',$request->rowid);
-                        if($result!=false){
-                            $data['status']=true;
-                            $data['message']="Operation successful";
-                            $data['data']="Your request executed successfully.";
-                        }else{
-                            $data['status']=false;
-                            $data['message']="Delete failed.";
-                            $data['data']="Some error occurred .Please try again.";
-                        }
+    try{
+        if(isset($this->session->adminLogin['userid'])){
+            $request=json_decode(json_encode($_POST));
+            $data=array();
+            if(isset($request->rowid) && is_numeric($request->rowid) && $request->rowid>0){
+                $where="id=$request->rowid ";
+                $update=array();
+                $update[]=array(
+                    'updateby'=>$this->session->adminLogin['userid'],
+                    'updateat'=>date('Y-m-d H:i:s')
+                );
+                if(isset($request->isactive) && is_numeric($request->isactive)){
+                    if ($request->isactive==1){
+                        $update[0]['isactive']=false;
+                        $where.=" and isactive=true";
+                    }elseif ($request->isactive==0){
+                        $update[0]['isactive']=true;
+                        $where.=" and isactive=false";
                     }else{
                         $data['status']=false;
-                        $data['message']="Invalid rowid";
+                        $data['message']="Bad request";
                         $data['data']="Invalid request for delete";
+                        echo json_encode($data);
+                        exit();
                     }
-                    echo json_encode($data);
+                }
+                $res=$this->Model_Db->select(16,null,$where);
+                if($res!=false){
+                    $result=$this->Model_Db->update(16,$update,'id',$request->rowid);
+                    if($result!=false){
+                        $data['status']=true;
+                        $data['message']="Operation successful";
+                        $data['data']="Your request executed successfully.";
+                    }else{
+                        $data['status']=false;
+                        $data['message']="Delete failed.";
+                        $data['data']="Some error occurred .Please try again.";
+                    }
                 }else{
                     $data['status']=false;
-                    $data['message']="Bad request";
-                    $data['data']="Invalid request generated.";
-                    echo json_encode($data);
+                    $data['message']="Invalid rowid";
+                    $data['data']="Invalid request for delete";
                 }
+                echo json_encode($data);
             }else{
-                redirect('Welcome/');
+                $data['status']=false;
+                $data['message']="Bad request";
+                $data['data']="Invalid request generated.";
+                echo json_encode($data);
             }
-        }catch (Exception $e){
-            $data['message']= $e->getMessage();
-            $data['status']=false;
-            $data['error']=true;
-            echo json_encode($data);
+        }else{
+            redirect('Welcome/');
         }
+    }catch (Exception $e){
+        $data['message']= $e->getMessage();
+        $data['status']=false;
+        $data['error']=true;
+        echo json_encode($data);
     }
+}
 }
